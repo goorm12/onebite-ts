@@ -23,3 +23,9 @@ let null1: null = null;
 
 // undefined
 let unde1: undefined = undefined;
+
+// 리터럴
+// 리터럴 -> 값
+let numA: 10 = 10;
+let strA: "hello" = "hello";
+let bollA: true = true;
