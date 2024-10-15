@@ -13,3 +13,7 @@ let str1: string = "hello";
 let str2: string = "hello"; // 작음 따옴표
 let str3: string = `hello`;
 let str4: string = `hello ${num1}`;
+
+// boolean
+let bool1: boolean = true;
+let bool2: boolean = false;
