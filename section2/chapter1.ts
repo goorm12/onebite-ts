@@ -7,3 +7,9 @@ let num4: number = -0.123;
 let num5: number = Infinity;
 let num6: number = -Infinity;
 let num7: number = NaN;
+
+// string
+let str1: string = "hello";
+let str2: string = "hello"; // 작음 따옴표
+let str3: string = `hello`;
+let str4: string = `hello ${num1}`;
