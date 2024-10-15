@@ -14,7 +14,7 @@
   "ts-node": {
     // 'esm' 옵션을 true로 설정하여 ts-node가 ECMAScript 모듈을 지원하도록 함
     "esm": true
-  },
+  }
   // tsc에게 컴파일 할 타입스크립트 파일의 범위와 위치를 알려주는 옵션
-  "include": ["src"]
+  // "include": ["src"]
 }
