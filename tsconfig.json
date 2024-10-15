@@ -1,10 +1,20 @@
 {
   "compilerOptions": {
+    // 컴파일 결과 생성되는 자바스크립트 코드의 버전을 설정하는 옵션
     "target": "ESNext",
+    // 자바스크립트 코드의 모듈 시스템을 설정하는 옵션
     "module": "ESNext",
+    // 컴파일 결과 생성할 자바스크립트 코드의 위치를 결정하는 옵션
     "outDir": "dist",
+    // 타입스크립트 컴파일러의 타입 검사 엄격함 수준을 정하는 옵션
     "strict": true,
+    // 타입스크립트 컴파일러가 프로젝트 내의 모듈들을 어떻게 식별하고 처리할지 결정하는 옵션
     "moduleDetection": "force"
   },
+  "ts-node": {
+    // 'esm' 옵션을 true로 설정하여 ts-node가 ECMAScript 모듈을 지원하도록 함
+    "esm": true
+  },
+  // tsc에게 컴파일 할 타입스크립트 파일의 범위와 위치를 알려주는 옵션
   "include": ["src"]
 }
