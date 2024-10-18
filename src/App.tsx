@@ -21,13 +21,17 @@ function App() {
       },
     ]);
   };
+
+  const onClickDelete = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
   return (
     <div>
       <h1>Todo</h1>
       <Editor onClickAdd={onClickAdd} />
       <div>
         {todos.map((todo) => (
-          <TodoItem key={todo.id} {...todo} />
+          <TodoItem key={todo.id} {...todo} onClickDelete={onClickDelete} />
         ))}
       </div>
     </div>
