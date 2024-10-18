@@ -1,11 +1,10 @@
-import { useTodoDispatch } from "../App";
 import { Todo } from "../types";
+import { useTodoContext } from "../hooks/useTodoContext";
 
 const TodoItem = (props: Todo) => {
-  const dispatch = useTodoDispatch();
-
+  const { onClickDelete } = useTodoContext();
   const onClickButton = () => {
-    dispatch.onClickDelete(props.id);
+    onClickDelete(props.id);
   };
 
   return (
