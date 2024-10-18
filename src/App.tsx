@@ -1,8 +1,9 @@
-import { useEffect, useReducer, useRef } from "react";
+import { useContext, useEffect, useReducer, useRef } from "react";
 import "./App.css";
 import Editor from "./components/Editor";
-import TodoItem from "./components/TodoItem";
 import { Todo } from "./types";
+import TodoItem from "./components/TodoItem";
+import React from "react";
 
 type Action =
   | {
@@ -12,9 +13,12 @@ type Action =
         content: string;
       };
     }
-  | { type: "DELETE"; id: number };
+  | {
+      type: "DELETE";
+      id: number;
+    };
 
-const reducer = (state: Todo[], action: Action) => {
+function reducer(state: Todo[], action: Action) {
   switch (action.type) {
     case "CREATE": {
       return [...state, action.data];
@@ -23,32 +27,64 @@ const reducer = (state: Todo[], action: Action) => {
       return state.filter((it) => it.id !== action.id);
     }
   }
-};
+}
+
+export const TodoStateContext = React.createContext<Todo[] | null>(null);
+export const TodoDispatchContext = React.createContext<{
+  onClickAdd: (text: string) => void;
+  onClickDelete: (id: number) => void;
+} | null>(null);
+
+export function useTodoDispatch() {
+  const dispatch = useContext(TodoDispatchContext);
+  if (!dispatch) throw new Error("TodoDispatchContext에 문제가 있다.");
+  return dispatch;
+}
+
 function App() {
   const [todos, dispatch] = useReducer(reducer, []);
 
   const idRef = useRef(0);
 
+  const onClickAdd = (text: string) => {
+    dispatch({
+      type: "CREATE",
+      data: {
+        id: idRef.current++,
+        content: text,
+      },
+    });
+  };
+
+  const onClickDelete = (id: number) => {
+    dispatch({
+      type: "DELETE",
+      id: id,
+    });
+  };
+
   useEffect(() => {
     console.log(todos);
   }, [todos]);
 
-  const onClickAdd = (text: string) => {
-    dispatch({ type: "CREATE", data: { id: idRef.current++, content: text } });
-  };
-
-  const onClickDelete = (id: number) => {
-    dispatch({ type: "DELETE", id: id });
-  };
   return (
-    <div>
-      <h1>Todo</h1>
-      <Editor onClickAdd={onClickAdd} />
-      <div>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} {...todo} onClickDelete={onClickDelete} />
-        ))}
-      </div>
+    <div className="App">
+      <h1>할 일 목록</h1>
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider
+          value={{
+            onClickAdd,
+            onClickDelete,
+          }}
+        >
+          <Editor />
+          <div>
+            {todos.map((todo) => (
+              <TodoItem key={todo.id} {...todo} />
+            ))}
+          </div>
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   );
 }
