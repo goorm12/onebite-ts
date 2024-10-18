@@ -1,8 +1,8 @@
-import { useTodoContext } from "../hooks/useTodoContext";
+import { useTodoStateContext } from "../hooks/useTodoStateContext";
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
-  const { todos } = useTodoContext();
+  const { todos } = useTodoStateContext();
 
   return (
     <div>

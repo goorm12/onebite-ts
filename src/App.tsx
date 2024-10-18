@@ -1,17 +1,20 @@
 import "./App.css";
 import Editor from "./components/Editor";
 import TodoList from "./components/TodoList";
+import { TodoDispatchContextProvider } from "./contexts/\bTodoDispatchContext";
 
-import { TodoContextProvider } from "./contexts/TodoContext";
+import { TodoStateContextProvider } from "./contexts/TodoStateContext";
 
 function App() {
   return (
     <div className="App">
       <h1>할 일 목록</h1>
-      <TodoContextProvider>
-        <Editor />
-        <TodoList />
-      </TodoContextProvider>
+      <TodoStateContextProvider>
+        <TodoDispatchContextProvider>
+          <Editor />
+          <TodoList />
+        </TodoDispatchContextProvider>
+      </TodoStateContextProvider>
     </div>
   );
 }
